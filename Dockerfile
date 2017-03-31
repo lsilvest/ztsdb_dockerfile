@@ -1,3 +1,6 @@
+# 
+# The above line is generated automatically, do not modify!
+
 FROM ubuntu:16.04
 
 MAINTAINER Leonardo Silvestri (lsilvestri@ztsdb.org)
