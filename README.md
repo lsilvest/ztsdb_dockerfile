@@ -36,6 +36,14 @@ container:
 
     docker run -it -p 19300:19300 lsilvest/ztsdb bash
 
+Make note of the IP address of the container; Here is one way of
+getting it:
+
+    ip addr show
+
+In this example, we will assume the container's IP address
+is 172.17.0.2.
+
 In this shell, start a ztsdb instance listening on the published port:
 
     ztsdb -p 19300
@@ -62,10 +70,9 @@ instance:
     idx   <-  as.time(NULL)
     a     <<- zts(idx, data)
 
-Then the append utility can be started from another container like
-this (IP address=172.17.0.2, port=19300, rate=100000 msg/second,
-time-series' name=a, number of columns=3, continue sending
-indefinitely):
+Then _append_ can be started from another container like this (IP
+address=172.17.0.2, port=19300, rate=100000 msg/second, time-series'
+name=a, number of columns=3, continue sending indefinitely):
 
     append 172.17.0.2 19300 100000 a 3
 
@@ -89,5 +96,5 @@ More information on the _append_ utility can be found
 - The R interface package for ztsdb is also hosted on
   [Gitlab](https://gitlab.com/lsilvest/rztsdb)
 
-- [Docker image](https://hub.docker.com/r/lsilvest/ztsdb/)
+- [The Docker image](https://hub.docker.com/r/lsilvest/ztsdb/)
 
