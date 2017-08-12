@@ -16,4 +16,8 @@ RUN apt-get update && \
     make clean && \
     apt-get remove -y libboost-filesystem-dev flex bison gcc g++ git \
                       gengetopt bzip2 libdouble-conversion-dev \
-                      software-properties-common python-software-properties cmake make
+                      software-properties-common python-software-properties cmake make && \
+    curl -OLs https://eddelbuettel.github.io/r-travis/run.sh && chmod 0755 run.sh && \
+    ./run.sh bootstrap && \
+    ./run.sh install_aptget r-cran-rcppcctz r-cran-bit64 r-cran-zoo r-cran-data.table r-cran-runit
+    

@@ -26,19 +26,19 @@ One can start multiple containers to test multiple instances or to simulate real
 
     docker run -it -p 19300:19300 lsilvest/ztsdb bash
 
-Make note of the IP address of the container; Here is one way of getting it:
+Make note of the IP address of the container; here is one way of getting it:
 
     ip addr show
 
 In this example, we will assume the container's IP address is 172.17.0.2.
 
-In this shell, start a ztsdb instance listening on the published port:
+Start a ztsdb instance listening on the published port:
 
     ztsdb -p 19300
 
 #### Connecting from another ztsdb instance
 
-Other ztsdb instances can be started in the same way as above. Once the ztsdb has been started, a connection can be established as usual from the ztsdb command line:
+Other ztsdb instances can be started in the same way as above. Once an instance has been started, a connection can be established as usual from the ztsdb command line:
 
     c1 <- connection("172.17.0.2", 19300)
 
