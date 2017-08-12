@@ -7,7 +7,7 @@ MAINTAINER Leonardo Silvestri (lsilvestri@ztsdb.org)
 
 RUN apt-get update && \
     apt-get install -y make cmake libboost-filesystem-dev flex bison gcc g++ git \
-                       gengetopt bzip2 libdouble-conversion-dev \
+                       gengetopt bzip2 libdouble-conversion-dev curl \
                        software-properties-common python-software-properties tzdata && \
     add-apt-repository ppa:edd/misc && apt-get update && apt-get install -y crpcut crpcut-dev && \
     git clone https://lsilvest@gitlab.com/lsilvest/ztsdb.git && \
