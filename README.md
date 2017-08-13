@@ -45,7 +45,8 @@ Other ztsdb instances can be started in the same way as above. Once an
 instance has been started, a connection can be established as usual
 from the ztsdb command line:
 
-    docker run -it lsilvest/ztsdb ztsdb                                                                     c1 <- connection("172.17.0.2", 19300)
+    docker run -it lsilvest/ztsdb ztsdb
+    c1 <- connection("172.17.0.2", 19300)
 
 #### Append utility
 
@@ -58,7 +59,7 @@ To use it, a time-series must first be created on the ztsdb server instance:
     data  <-  matrix(0, 0, 3, dimnames=list(NULL, c("a","b","c")))
     idx   <-  as.time(NULL)
     a     <<- zts(idx, data)
-
+    
 The _append_ can be started from another container like this (IP
 address=172.17.0.2, port=19300, rate=100000 msg/second, time-series'
 name=a, number of columns=3, continue sending indefinitely):
@@ -83,8 +84,7 @@ And a connection can then be established to the running instance:
 
     con <- connection("172.17.0.2", 19300)
 
-and used in its usual idiomatic way ([see
-http://www.ztsdb.org](http://www.ztsdb.org) for more info:
+and used in its usual idiomatic way (see [http://www.ztsdb.org](http://www.ztsdb.org) for more info):
 
     con ? 2*2                        # ask the remote instance to perform a multiplication
     con ? matrix(1:10, 5, 2)         # ask the remote instance to create a matrix
