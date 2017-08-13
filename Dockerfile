@@ -14,7 +14,7 @@ RUN apt-get update && \
     ./run.sh bootstrap && \
     ./run.sh install_aptget r-cran-xts r-cran-rcpp r-cran-bit64 && \
     git clone https://lsilvest@gitlab.com/lsilvest/ztsdb.git && \
-    cd ztsdb && mkdir build && cd build && cmake .. && make -j72 && ctest && make rtest && \
+    cd ztsdb && mkdir build && cd build && cmake .. && make -j4 && ctest && make rtest && \
     make install && ldconfig && \
     cp itests/append/append /usr/local/bin/append && \
     git clone https://lsilvest@gitlab.com/lsilvest/rztsdb.git && \
