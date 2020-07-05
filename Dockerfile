@@ -1,4 +1,4 @@
-# https://gitlab.com/lsilvest/ztsdb/commit/57cee9c24b006a8466d32c4f18074e683997c8a0
+# https://gitlab.com/lsilvest/ztsdb/commit/d28fc3de8cff22004e03c3dbb111fbcc94627aa3
 # The above line is generated automatically, do not modify!
 
 FROM ubuntu:16.04
