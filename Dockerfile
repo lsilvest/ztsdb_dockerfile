@@ -1,27 +1,27 @@
 # https://gitlab.com/lsilvest/ztsdb/commit/bef0d386f2790ce19ca0d9a6f8930b945e7c00fb
 # The above line is generated automatically, do not modify!
 
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 MAINTAINER Leonardo Silvestri (lsilvestri@ztsdb.org)
 
-RUN apt-get update && \
-    apt-get install -y make cmake libboost-filesystem-dev flex bison gcc g++ git \
-                       gengetopt bzip2 libdouble-conversion-dev curl sudo apt-transport-https \
-                       software-properties-common python-software-properties tzdata && \
-    add-apt-repository ppa:edd/misc && apt-get update && apt-get install -y crpcut crpcut-dev && \
-    curl -OLs https://eddelbuettel.github.io/r-travis/run.sh && chmod 0755 run.sh && \
-    ./run.sh bootstrap && \
-    ./run.sh install_aptget r-cran-xts r-cran-rcpp r-cran-bit64 && \
-    git clone https://lsilvest@gitlab.com/lsilvest/ztsdb.git && \
-    cd ztsdb && mkdir build && cd build && cmake .. && make -j4 && ctest && make rtest && \
-    make install && ldconfig && \
-    cp itests/append/append /usr/local/bin/append && \
-    git clone https://lsilvest@gitlab.com/lsilvest/rztsdb.git && \
-    R CMD build rztsdb && \
-    R CMD build rztsdb && R CMD INSTALL rztsdb_* && \
-    make clean && \
-    apt-get remove -y libboost-filesystem-dev flex bison gcc g++ git \
-                      gengetopt bzip2 libdouble-conversion-dev \
-                      software-properties-common python-software-properties cmake make
+RUN apt update
+RUN apt install -y make cmake libboost-filesystem-dev flex bison \
+                   gcc g++ git gengetopt bzip2 libdouble-conversion-dev curl sudo apt-transport-https \
+                   software-properties-common curl lsb-core sudo
+RUN DEBIAN_FRONTEND=noninteractive apt install -y tzdata                   
+RUN curl -OLs https://eddelbuettel.github.io/r-travis/run.sh && chmod 0755 run.sh
+RUN ./run.sh bootstrap
+RUN ./run.sh install_aptget r-cran-data.table r-cran-rcpp r-cran-bit64 r-cran-zoo
+RUN ./run.sh install_github eddelbuettel/RcppCCTZ eddelbuettel/RcppDate eddelbuettel/nanotime
+RUN git clone https://lsilvest@gitlab.com/lsilvest/ztsdb.git && \
+    cd ztsdb && mkdir build && cd build && cmake .. && make -j4 && make rtest && \
+    make install && ldconfig
+RUN cp /ztsdb/build/itests/append/append /usr/local/bin/append
+RUN git clone https://lsilvest@gitlab.com/lsilvest/rztsdb.git && \
+    R CMD build rztsdb && R CMD INSTALL rztsdb_*
+RUN cd ztsdb/build && make clean
+RUN apt remove -y libboost-filesystem-dev flex bison gcc g++ git \
+                  gengetopt bzip2 libdouble-conversion-dev \
+                  software-properties-common lsb-core curl cmake make
     
